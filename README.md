@@ -1,5 +1,8 @@
 ## feathers-redux-immutable
 
+[![Build Status](https://travis-ci.org/collegepulse/feathers-redux-immutable.svg?branch=master)](https://travis-ci.org/collegepulse/feathers-redux-immutable)
+[![Coverage Status](https://coveralls.io/repos/github/collegepulse/feathers-redux-immutable/badge.svg?branch=master)](https://coveralls.io/github/collegepulse/feathers-redux-immutable?branch=master)
+
 An [immutable][1], [redux][2] data store for FeathersJS [services][3].
 
 ## Install
