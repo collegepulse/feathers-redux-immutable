@@ -2,7 +2,7 @@
   "name": "feathers-redux-immutable",
   "version": "0.0.0",
   "description": "An immutable, redux data store for FeathersJS services.",
-  "main": "index.js",
+  "main": "lib/index.js",
   "scripts": {
     "compile": "shx rm -rf lib/ && babel -d lib/ src/",
     "coverage": "nyc report --reporter=text-lcov | coveralls",
@@ -30,10 +30,14 @@
     "url": "https://github.com/collegepulse/feathers-redux-immutable/issues"
   },
   "homepage": "https://github.com/collegepulse/feathers-redux-immutable#readme",
+  "directories": {
+    "lib": "lib"
+  },
   "peerDependencies": {
     "timm": "1.x"
   },
   "devDependencies": {
+    "babel-cli": "6.24.1",
     "babel-core": "6.25.0",
     "babel-eslint": "7.2.3",
     "babel-plugin-espower": "2.3.2",
