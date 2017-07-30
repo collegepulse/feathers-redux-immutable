@@ -1,0 +1,22 @@
+{
+  "statements": 90,
+  "branches": 80,
+  "functions": 90,
+  "lines": 90,
+  "reporter": [
+    "html",
+    "text-summary"
+  ],
+  "require": [
+    "babel-register"
+  ],
+  "sourceMap": false,
+  "instrument": false,
+  "include": [
+    "src/**/*.js"
+  ],
+  "exclude": [
+    "src/**/*.spec.js",
+    "test/**/*.spec.js"
+  ]
+}

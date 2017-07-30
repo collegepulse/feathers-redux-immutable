@@ -2,10 +2,44 @@
 
 An [immutable][1], [redux][2] data store for FeathersJS [services][3].
 
+## Install
+
+```
+npm install feathers-redux-immutable --save
+```
+
 ## Usage
 
 ```js
-/* todo */
+import reduxifyServices from 'feathers-redux-immutable';
+const feathersClient = feathers()...;
+
+// Create Redux actions and reducers for Feathers services
+const services = reduxifyServices(feathersClient, ['messages']);
+
+// Configure Redux store & reducers
+export default combineReducers({
+  messages: services.messages.reducer,
+});
+
+// Feathers service calls may now be dispatched.
+store.dispatch(services.messages.get('557XxUL8PalGMgOo'));
+```
+
+## Shape of the store
+
+The above code produces a state shaped like:
+```javascript
+state = {
+  messages: {
+    isLoading: boolean, // If get or find have started
+    isSaving: boolean, // If update, patch or remove have started
+    isFinished: boolean, // If last call finished successfully
+    isError: Feathers error, // If last call was unsuccessful
+    data: hook.result, // Results from other than a find call
+    queryResult: hook.result, // Results from a find call. May be paginated.
+  },
+};
 ```
 
 ## Why Immutable?
