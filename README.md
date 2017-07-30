@@ -18,20 +18,51 @@ import reduxifyServices from 'feathers-redux-immutable';
 const feathersClient = feathers()...;
 
 // Create Redux actions and reducers for Feathers services
-const services = reduxifyServices(feathersClient, ['messages']);
+const services = reduxifyServices(feathersClient, ['messages', 'users']);
 
 // Configure Redux store & reducers
 export default combineReducers({
   messages: services.messages.reducer,
+  users: services.users.reducer,
 });
 
 // Feathers service calls may now be dispatched.
 store.dispatch(services.messages.get('557XxUL8PalGMgOo'));
 ```
 
+## Action creators
+
+`reduxifyServices` returns an object with the shape:
+
+```javascript
+{
+  messages: { // For the Feathers service with path /messages.
+    // action creators
+    create(data, params) {}, // Action creator for app.services('messages').create(data, params)
+    update(id, data, params) {},
+    patch(id, data, params) {},
+    remove(id, params) {},
+    find(params) {},
+    get(id, params) {},
+    store(object) {}, // Interface for realtime replication.
+    reset() {}, // Reinitializes store for this service.
+    // reducer
+    reducer() {}, // Reducers handling actions MESSAGES_CREATE_PENDING, _FULFILLED, and _REJECTED.
+  },
+  users: { ... },
+}
+```
+
+Service calls can be dispatched by:
+
+```javascript
+dispatch(services.messages.create(data, params));
+```
+
 ## Shape of the store
 
-The above code produces a state shaped like:
+The usage example code produces a Redux state with the shape:
+
 ```javascript
 state = {
   messages: {
@@ -42,6 +73,7 @@ state = {
     data: hook.result, // Results from other than a find call
     queryResult: hook.result, // Results from a find call. May be paginated.
   },
+  users: { ... },
 };
 ```
 
@@ -60,6 +92,7 @@ state = {
       records: [ objects ], // Sorted near realtime contents of remote service
     },
   },
+  users: { ... },
 }
 ```
 
