@@ -42,6 +42,35 @@ state = {
 };
 ```
 
+If using [feathers-offline-realtime-immutable][5], the state will be decorated with these additional properties:
+
+```javascript
+state = {
+  messages: {
+    store: {
+      connected: boolean, // If replication engine still listening for Feathers service events
+      last: { // Read https://github.com/feathersjs/feathers-offline-realtime#event-information.
+        action: string, // Replication action.
+        eventName: string, // Feathers service event name. e.g. created
+        records: object, // Feathers service event record.
+      },
+      records: [ objects ], // Sorted near realtime contents of remote service
+    },
+  },
+}
+```
+
+## Replication Engine Integration
+
+```
+const Realtime = require('feathers-offline-realtime-immutable');
+const messages = feathersClient.service('/messages');
+
+const messagesRealtime = new Realtime(messages, { subscriber: (records, last) => {
+  store.dispatch(services.messages.store({ connected: messagesRealtime.connected, last, records }));
+} });
+```
+
 ## Why Immutable?
 
 Immutable objects allow for shallow equality checking.
@@ -61,3 +90,4 @@ MIT
 [2]: http://redux.js.org/
 [3]: https://docs.feathersjs.com/api/services
 [4]: https://facebook.github.io/react/docs/react-api.html#react.purecomponent
+[5]: https://github.com/collegepulse/feathers-offline-realtime-immutable
