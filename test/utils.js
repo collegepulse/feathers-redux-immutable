@@ -7,7 +7,7 @@ export function clone(obj) {
 export function makeDataItem(id) {
   return {
     id,
-    message: `message-${id}`,
+    order: id,
   };
 }
 

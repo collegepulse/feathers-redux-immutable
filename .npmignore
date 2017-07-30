@@ -1,0 +1,10 @@
+.nyc_output
+.editorconfig
+.jshintrc
+.travis.yml
+.babelrc
+.idea/
+coverage/
+src/
+test/
+!lib/
