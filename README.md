@@ -42,7 +42,7 @@ state = {
 };
 ```
 
-If using [feathers-offline-realtime-immutable][5], the state will be decorated with these additional properties:
+If integrating with [feathers-offline-realtime-immutable][5], the state will be decorated with these additional properties:
 
 ```javascript
 state = {
@@ -62,7 +62,7 @@ state = {
 
 ## Replication Engine Integration
 
-```
+```javascript
 const Realtime = require('feathers-offline-realtime-immutable');
 const messages = feathersClient.service('/messages');
 
